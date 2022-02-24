@@ -1,3 +1,4 @@
+const { time } = require("console");
 const fs = require("fs");
 const path = require("path");
 
@@ -13,6 +14,7 @@ module.exports = {
   description: "Vuepress 模板",
   themeConfig: {
     navbar: [...getNavBar()],
+    // sidebar: { ...getSortedFiles() },
     sidebar: { ...getSideBar() },
   },
 };
@@ -28,6 +30,7 @@ function getNavBar() {
   return navbar;
 }
 
+// 依檔案名稱排序
 function getSideBar() {
   const sidebar = {};
   folders.forEach((folder) => {
@@ -45,4 +48,27 @@ function getSideBar() {
     });
   });
   return sidebar;
+}
+
+// 依編輯時間排序
+function getSortedFiles() {
+  const children = {};
+  folders.forEach((folder) => {
+    children[`/${folder}/`] = [];
+    const folderFiles = fs
+      .readdirSync(path.join(rootFolder, folder))
+      .map((fileName) => ({
+        name: fileName,
+        time: fs
+          .statSync(path.join(rootFolder, folder, fileName))
+          .mtime.getTime(),
+      }))
+      .sort((a, b) => a.time - b.time)
+      .map((file) => file.name);
+    children[`/${folder}/`].push({
+      text: folder.toUpperCase(),
+      children: [...folderFiles],
+    });
+  });
+  return children;
 }
