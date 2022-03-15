@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { title, description, logo } = require("./userConfig.js");
 
 const mdFile = ".md";
 const rootFolder = path.dirname(__dirname);
@@ -9,14 +10,17 @@ const folders = rootfiles.filter(
 );
 
 module.exports = {
-  title: "Vuepress Tempate",
-  description: "The quick start to vuepress",
-  head: [["link", { rel: "icon", href: "https://v2.vuepress.vuejs.org/images/hero.png" }]],
-  themeConfig: {
-    logo: "https://v2.vuepress.vuejs.org/images/hero.png",
-    navbar: [
-      ...getNavBar()
+  title: title,
+  description: description,
+  head: [
+    [
+      "link",
+      { rel: "icon", href: "https://v2.vuepress.vuejs.org/images/hero.png" },
     ],
+  ],
+  themeConfig: {
+    logo: logo,
+    navbar: [...getNavBar()],
     sidebar: { ...getSideBar() },
   },
 };
