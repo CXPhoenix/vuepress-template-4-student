@@ -1,7 +1,3 @@
-/**
- * author: CXPhoenix
- */
-
 const fs = require("fs");
 const path = require("path");
 
@@ -13,10 +9,14 @@ const folders = rootfiles.filter(
 );
 
 module.exports = {
-  title: "Vuepress template",
-  description: "Vuepress 模板",
+  title: "Vuepress Tempate",
+  description: "The quick start to vuepress",
+  head: [["link", { rel: "icon", href: "https://v2.vuepress.vuejs.org/images/hero.png" }]],
   themeConfig: {
-    navbar: [...getNavBar()],
+    logo: "https://v2.vuepress.vuejs.org/images/hero.png",
+    navbar: [
+      ...getNavBar()
+    ],
     sidebar: { ...getSideBar() },
   },
 };
@@ -39,7 +39,10 @@ function getSideBar() {
     const folderFiles = fs.readdirSync(path.join(rootFolder, folder));
     const children = [];
     folderFiles
-      .filter((item) => item.toLowerCase() != "readme.md")
+      .filter(
+        (item) =>
+          item.toLowerCase() != "readme.md" && path.extname(item) === mdFile
+      )
       .forEach((file) => {
         children.push(`/${folder}/${file}`);
       });
