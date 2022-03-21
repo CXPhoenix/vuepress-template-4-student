@@ -1,2 +1,2 @@
-npm run dev:docs
+npm run docs:dev
 pause
