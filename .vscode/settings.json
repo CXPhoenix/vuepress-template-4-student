@@ -1,0 +1,8 @@
+{
+  "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "pasteImage.path": "${projectRoot}/docs/.vuepress/public/images/",
+  "pasteImage.namePrefix": "${currentFileNameWithoutExt}/",
+  "pasteImage.insertPattern": "${imageSyntaxPrefix}/images/${currentFileNameWithoutExt}/${imageFileName}${imageSyntaxSuffix}"
+}
